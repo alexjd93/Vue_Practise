@@ -1,27 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <Navigation />
+  <button @click="$store.dispatch('fetchMovieData')">Click</button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { computed, defineComponent, onMounted, provide, ref, watch } from 'vue';
+import Navigation from '../src/components/Navigation/navigation.vue';
+
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: { Navigation },
+  // mounted() {},
+  // computed: {
+  //   movieData() {
+  //     const store = useStore();
+  //     console.log(store.getters.getMovieContainer);
+  //     return store.getters.getMovieContainer;
+  //   },
+  // },
+  // mounted() {
+
+  // },
 });
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
