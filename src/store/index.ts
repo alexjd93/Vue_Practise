@@ -4,20 +4,29 @@ import axios from 'axios';
 import { API_KEY, API_URL } from '../config';
 import Vuex, { StoreOptions } from 'vuex';
 import { RootState } from './types';
+import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../config';
 export const store = createStore({
   state: {
     data: [],
-    hero: {},
+    hero_image_url: '',
+    overview: '',
+    title: '',
   },
   getters: {
     getMovieContainer(state) {
       return state.data;
     },
+    getImageUrl(state) {
+      console.log(state);
+      return `${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.hero_image_url}`;
+    },
   },
   mutations: {
     SET_MOVIE(state, movie) {
       state.data = movie;
-      state.hero = movie[0];
+      state.hero_image_url = movie[0].backdrop_path;
+      state.overview = movie[0].overview;
+      state.title = movie[0].original_title;
     },
   },
   actions: {
