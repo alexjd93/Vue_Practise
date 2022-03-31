@@ -1,8 +1,10 @@
 <template lang="">
-  <div
-    :class="['w-full h-full bg-no-repeat bg-cover bg-center', hero_image_url]"
-  >
-    <div>{{ hero_image_url }}</div>
+  <div class="w-full h-full h-128">
+    <img
+      class="w-full h-full object-cover"
+      :src="hero_image_url"
+      alt="no image"
+    />
   </div>
 </template>
 <script>
@@ -16,9 +18,8 @@ export default {
   setup() {
     const store = useStore();
     const hero_image_url = computed(() => {
-      console.log();
-      return store.getters.getImageUrl;
-      //   `bg-[url(${store.getters.getImageUrl})]`
+      const url = store.getters.getImageUrl;
+      return url;
     });
     return {
       hero_image_url,
