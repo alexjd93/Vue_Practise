@@ -1,9 +1,6 @@
 import { createStore } from 'vuex';
-import { getPopularMovieData } from '../api/constant';
 import axios from 'axios';
 import { API_KEY, API_URL } from '../config';
-import Vuex, { StoreOptions } from 'vuex';
-import { RootState } from './types';
 import { IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../config';
 export const store = createStore({
   state: {
@@ -18,16 +15,17 @@ export const store = createStore({
       return state.data;
     },
     getImageUrl(state) {
-      console.log(state);
       return `${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.hero_image_url}`;
     },
   },
   mutations: {
     SET_MOVIE(state, movie) {
       state.data = movie;
-      state.hero_image_url = movie[0].backdrop_path;
-      state.overview = movie[0].overview;
-      state.title = movie[0].original_title;
+    },
+    SET_HERO(state, movie) {
+      state.hero_image_url = movie.backdrop_path;
+      state.overview = movie.overview;
+      state.title = movie.original_title;
     },
     SET_SEARCH(state, search) {
       state.data = search;
@@ -41,10 +39,11 @@ export const store = createStore({
         const newData = data.results.map((data: any) => {
           const url = data['poster_path'];
           data['poster_url'] = IMAGE_BASE_URL + POSTER_SIZE + url;
-
           return data;
         });
+        console.log(newData);
         commit('SET_MOVIE', newData);
+        commit('SET_HERO', newData[0]);
       } catch (err) {
         alert(err);
         console.log(err);

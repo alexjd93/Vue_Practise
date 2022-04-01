@@ -12,7 +12,6 @@
 </template>
 <script>
 import { useStore } from 'vuex';
-import { computed } from 'vue';
 export default {
   name: 'Search-content',
   setup() {
